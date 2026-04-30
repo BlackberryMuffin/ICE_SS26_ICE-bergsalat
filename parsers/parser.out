@@ -1,0 +1,111 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    BOOL_OP_BI
+    BOOL_OP_UN
+    Comp_OP
+    EQUALS
+    F
+    T
+
+Grammar
+
+Rule 0     S' -> int
+Rule 1     int -> INT
+Rule 2     float -> FLOAT
+Rule 3     expression -> int
+Rule 4     expression -> float
+Rule 5     int -> INT NUM_OP_UN
+Rule 6     float -> float NUM_OP_UN
+Rule 7     int -> int int NUM_OP_BI
+Rule 8     float -> float float NUM_OP_BI
+Rule 9     float -> int float NUM_OP_BI
+Rule 10    float -> float int NUM_OP_BI
+
+Terminals, with rules where they appear
+
+BOOL_OP_BI           : 
+BOOL_OP_UN           : 
+Comp_OP              : 
+EQUALS               : 
+F                    : 
+FLOAT                : 2
+INT                  : 1 5
+NUM_OP_BI            : 7 8 9 10
+NUM_OP_UN            : 5 6
+T                    : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 
+float                : 4 6 8 8 9 10
+int                  : 3 7 7 9 10 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . int
+    (1) int -> . INT
+    (5) int -> . INT NUM_OP_UN
+    (7) int -> . int int NUM_OP_BI
+
+    INT             shift and go to state 2
+
+    int                            shift and go to state 1
+
+state 1
+
+    (0) S' -> int .
+    (7) int -> int . int NUM_OP_BI
+    (1) int -> . INT
+    (5) int -> . INT NUM_OP_UN
+    (7) int -> . int int NUM_OP_BI
+
+    INT             shift and go to state 2
+
+    int                            shift and go to state 3
+
+state 2
+
+    (1) int -> INT .
+    (5) int -> INT . NUM_OP_UN
+
+    INT             reduce using rule 1 (int -> INT .)
+    $end            reduce using rule 1 (int -> INT .)
+    NUM_OP_BI       reduce using rule 1 (int -> INT .)
+    NUM_OP_UN       shift and go to state 4
+
+
+state 3
+
+    (7) int -> int int . NUM_OP_BI
+    (7) int -> int . int NUM_OP_BI
+    (1) int -> . INT
+    (5) int -> . INT NUM_OP_UN
+    (7) int -> . int int NUM_OP_BI
+
+    NUM_OP_BI       shift and go to state 5
+    INT             shift and go to state 2
+
+    int                            shift and go to state 3
+
+state 4
+
+    (5) int -> INT NUM_OP_UN .
+
+    INT             reduce using rule 5 (int -> INT NUM_OP_UN .)
+    $end            reduce using rule 5 (int -> INT NUM_OP_UN .)
+    NUM_OP_BI       reduce using rule 5 (int -> INT NUM_OP_UN .)
+
+
+state 5
+
+    (7) int -> int int NUM_OP_BI .
+
+    INT             reduce using rule 7 (int -> int int NUM_OP_BI .)
+    $end            reduce using rule 7 (int -> int int NUM_OP_BI .)
+    NUM_OP_BI       reduce using rule 7 (int -> int int NUM_OP_BI .)
+
