@@ -10,21 +10,23 @@ reserved = [
 tokens = [
     "NUM_OP_UN",
     "NUM_OP_BI",
-    "Comp_OP",
-    "EQUALS",
+    "COMP_OP",
+    "EQUALITY",
     "BOOL_OP_UN",
     "BOOL_OP_BI",
+    "IF_THEN_ELSE",
 
     "INT",
     "FLOAT",
 ] +reserved
 
-t_NUM_OP_BI = r"\+|\*|\^"
+t_NUM_OP_BI = r"\+|\*|\^|%"
 t_NUM_OP_UN = r"~"
-t_Comp_OP = r"(<=)|(>=)|<|>|(!=)"
-t_EQUALS = r"=="
+t_COMP_OP = r"(<=)|(>=)|<|>"
+t_EQUALITY = r"(==)|(!=)"
 t_BOOL_OP_BI = r"&|\|"
 t_BOOL_OP_UN = r"!"
+t_IF_THEN_ELSE = r"\?"
 
 
 def t_FLOAT(t):
@@ -40,7 +42,7 @@ def t_INT(t):
     return t
 
 def t_variables(t):
-    r"""[a-zA-Z_][a-zA-Z_0-9]+'*"""
+    r"""[a-zA-Z_][a-zA-Z_0-9]*'*"""
     if t.value.upper() in reserved:
         t.type = t.value.upper()
     else:
@@ -62,3 +64,5 @@ def t_error(t):
 
 # Build the lexer
 lexer = lex.lex()
+lexer.input("T")
+print(lexer.token())

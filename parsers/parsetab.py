@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BOOL_OP_BI BOOL_OP_UN Comp_OP EQUALS F FLOAT INT NUM_OP_BI NUM_OP_UN Tint : INTfloat : FLOATexpression : int\n| floatint : INT NUM_OP_UNfloat : float NUM_OP_UNint : int int NUM_OP_BIfloat : float float NUM_OP_BI\n| int float NUM_OP_BI\n| float int NUM_OP_BI'
+_lr_signature = 'BOOL_OP_BI BOOL_OP_UN COMP_OP EQUALITY F FLOAT IF_THEN_ELSE INT NUM_OP_BI NUM_OP_UN Texpr : numexpr : boolnum : int\n| floatint : INTfloat : FLOATbool : T\n| Fint : INT NUM_OP_UNfloat : float NUM_OP_UNint : int int NUM_OP_BIfloat : float float NUM_OP_BI\n| int float NUM_OP_BI\n| float int NUM_OP_BIbool : int int COMP_OPbool : expr expr EQUALITY\n| int int EQUALITY\n| int float EQUALITY\n| float int EQUALITY\n| float float EQUALITYbool : bool BOOL_OP_UNbool : bool bool BOOL_OP_BIbool : bool expr expr IF_THEN_ELSE'
     
-_lr_action_items = {'INT':([0,1,2,3,4,5,],[2,2,-1,2,-5,-7,]),'$end':([1,2,4,5,],[0,-1,-5,-7,]),'NUM_OP_BI':([2,3,4,5,],[-1,5,-5,-7,]),'NUM_OP_UN':([2,],[4,]),}
+_lr_action_items = {'T':([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,20,21,22,23,24,26,27,28,32,33,34,35,36,37,38,],[6,6,-1,6,-3,-4,-7,-8,-5,-6,6,6,-21,6,-3,-4,-10,-9,-16,-22,6,-15,-17,-11,-18,-13,-20,-12,-19,-14,-23,]),'F':([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,20,21,22,23,24,26,27,28,32,33,34,35,36,37,38,],[7,7,-1,7,-3,-4,-7,-8,-5,-6,7,7,-21,7,-3,-4,-10,-9,-16,-22,7,-15,-17,-11,-18,-13,-20,-12,-19,-14,-23,]),'INT':([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,],[8,8,-1,8,8,8,-7,-8,-5,-6,8,8,-21,8,8,8,8,8,8,8,-10,-9,-16,-22,8,8,-15,-17,-11,8,8,8,-18,-13,-20,-12,-19,-14,-23,8,]),'FLOAT':([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,],[9,9,-1,9,9,9,-7,-8,-5,-6,9,9,-21,9,9,9,9,9,9,9,-10,-9,-16,-22,9,9,-15,-17,-11,9,9,9,-18,-13,-20,-12,-19,-14,-23,9,]),'$end':([1,2,3,4,5,6,7,8,9,12,20,21,22,23,26,27,28,32,33,34,35,36,37,38,],[0,-1,-2,-3,-4,-7,-8,-5,-6,-21,-10,-9,-16,-22,-15,-17,-11,-18,-13,-20,-12,-19,-14,-23,]),'EQUALITY':([2,3,4,5,6,7,8,9,10,12,16,17,18,19,20,21,22,23,24,26,27,28,32,33,34,35,36,37,38,],[-1,-2,-3,-4,-7,-8,-5,-6,22,-21,27,32,34,36,-10,-9,-16,-22,22,-15,-17,-11,-18,-13,-20,-12,-19,-14,-23,]),'IF_THEN_ELSE':([2,3,4,5,6,7,8,9,12,20,21,22,23,24,26,27,28,32,33,34,35,36,37,38,],[-1,-2,-3,-4,-7,-8,-5,-6,-21,-10,-9,-16,-22,38,-15,-17,-11,-18,-13,-20,-12,-19,-14,-23,]),'BOOL_OP_UN':([3,6,7,11,12,22,23,26,27,32,34,36,38,],[12,-7,-8,12,-21,-16,-22,-15,-17,-18,-20,-19,-23,]),'NUM_OP_UN':([5,8,9,15,17,18,20,29,31,33,35,37,],[20,21,-6,20,20,20,-10,20,20,-13,-12,-14,]),'BOOL_OP_BI':([6,7,11,12,22,23,26,27,32,34,36,38,],[-7,-8,23,-21,-16,-22,-15,-17,-18,-20,-19,-23,]),'COMP_OP':([8,16,21,28,],[-5,26,-9,-11,]),'NUM_OP_BI':([8,9,16,17,18,19,20,21,25,28,29,30,31,33,35,37,39,],[-5,-6,28,33,35,37,-10,-9,28,-11,33,37,35,-13,-12,-14,28,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'int':([0,1,3,],[1,3,3,]),}
+_lr_goto_items = {'expr':([0,1,3,10,11,13,24,],[1,10,13,10,13,24,10,]),'num':([0,1,3,10,11,13,24,],[2,2,2,2,2,2,2,]),'bool':([0,1,3,10,11,13,24,],[3,3,11,3,11,3,3,]),'int':([0,1,3,4,5,10,11,13,14,15,16,17,18,19,24,25,29,30,31,39,],[4,4,14,16,19,4,14,4,16,19,25,30,30,25,4,25,30,39,30,39,]),'float':([0,1,3,4,5,10,11,13,14,15,16,17,18,19,24,25,29,30,31,39,],[5,5,15,17,18,5,15,5,17,18,29,31,31,29,5,29,31,29,31,29,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,15 +26,28 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> int","S'",1,None,None,None),
-  ('int -> INT','int',1,'p_expression_int','vanilla_parser.py',27),
-  ('float -> FLOAT','float',1,'p_expression_float','vanilla_parser.py',29),
-  ('expression -> int','expression',1,'p_expression_e','vanilla_parser.py',31),
-  ('expression -> float','expression',1,'p_expression_e','vanilla_parser.py',32),
-  ('int -> INT NUM_OP_UN','int',2,'p_expression_int_op_un','vanilla_parser.py',35),
-  ('float -> float NUM_OP_UN','float',2,'p_expression_float_op_un','vanilla_parser.py',39),
-  ('int -> int int NUM_OP_BI','int',3,'p_expression_int_op_bi','vanilla_parser.py',44),
-  ('float -> float float NUM_OP_BI','float',3,'p_expression_float_op_bi','vanilla_parser.py',48),
-  ('float -> int float NUM_OP_BI','float',3,'p_expression_float_op_bi','vanilla_parser.py',49),
-  ('float -> float int NUM_OP_BI','float',3,'p_expression_float_op_bi','vanilla_parser.py',50),
+  ("S' -> expr","S'",1,None,None,None),
+  ('expr -> num','expr',1,'p_expression_num','vanilla_parser.py',33),
+  ('expr -> bool','expr',1,'p_expression_bool','vanilla_parser.py',36),
+  ('num -> int','num',1,'p_expression_to_num','vanilla_parser.py',39),
+  ('num -> float','num',1,'p_expression_to_num','vanilla_parser.py',40),
+  ('int -> INT','int',1,'p_expression_int','vanilla_parser.py',43),
+  ('float -> FLOAT','float',1,'p_expression_float','vanilla_parser.py',46),
+  ('bool -> T','bool',1,'p_expression_true_false','vanilla_parser.py',49),
+  ('bool -> F','bool',1,'p_expression_true_false','vanilla_parser.py',50),
+  ('int -> INT NUM_OP_UN','int',2,'p_expression_int_op_un','vanilla_parser.py',56),
+  ('float -> float NUM_OP_UN','float',2,'p_expression_float_op_un','vanilla_parser.py',60),
+  ('int -> int int NUM_OP_BI','int',3,'p_expression_int_op_bi','vanilla_parser.py',65),
+  ('float -> float float NUM_OP_BI','float',3,'p_expression_float_op_bi','vanilla_parser.py',69),
+  ('float -> int float NUM_OP_BI','float',3,'p_expression_float_op_bi','vanilla_parser.py',70),
+  ('float -> float int NUM_OP_BI','float',3,'p_expression_float_op_bi','vanilla_parser.py',71),
+  ('bool -> int int COMP_OP','bool',3,'p_expression_comp_op','vanilla_parser.py',76),
+  ('bool -> expr expr EQUALITY','bool',3,'p_expression_equality','vanilla_parser.py',94),
+  ('bool -> int int EQUALITY','bool',3,'p_expression_equality','vanilla_parser.py',95),
+  ('bool -> int float EQUALITY','bool',3,'p_expression_equality','vanilla_parser.py',96),
+  ('bool -> float int EQUALITY','bool',3,'p_expression_equality','vanilla_parser.py',97),
+  ('bool -> float float EQUALITY','bool',3,'p_expression_equality','vanilla_parser.py',98),
+  ('bool -> bool BOOL_OP_UN','bool',2,'p_expression_bool_op_un','vanilla_parser.py',109),
+  ('bool -> bool bool BOOL_OP_BI','bool',3,'p_expression_bool_op_bi','vanilla_parser.py',118),
+  ('bool -> bool expr expr IF_THEN_ELSE','bool',4,'p_expression_if_then_else','vanilla_parser.py',129),
 ]

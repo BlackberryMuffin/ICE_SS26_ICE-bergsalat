@@ -1,111 +1,1012 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
-Unused terminals:
-
-    BOOL_OP_BI
-    BOOL_OP_UN
-    Comp_OP
-    EQUALS
-    F
-    T
-
 Grammar
 
-Rule 0     S' -> int
-Rule 1     int -> INT
-Rule 2     float -> FLOAT
-Rule 3     expression -> int
-Rule 4     expression -> float
-Rule 5     int -> INT NUM_OP_UN
-Rule 6     float -> float NUM_OP_UN
-Rule 7     int -> int int NUM_OP_BI
-Rule 8     float -> float float NUM_OP_BI
-Rule 9     float -> int float NUM_OP_BI
-Rule 10    float -> float int NUM_OP_BI
+Rule 0     S' -> expr
+Rule 1     expr -> num
+Rule 2     expr -> bool
+Rule 3     num -> int
+Rule 4     num -> float
+Rule 5     int -> INT
+Rule 6     float -> FLOAT
+Rule 7     bool -> T
+Rule 8     bool -> F
+Rule 9     int -> INT NUM_OP_UN
+Rule 10    float -> float NUM_OP_UN
+Rule 11    int -> int int NUM_OP_BI
+Rule 12    float -> float float NUM_OP_BI
+Rule 13    float -> int float NUM_OP_BI
+Rule 14    float -> float int NUM_OP_BI
+Rule 15    bool -> int int COMP_OP
+Rule 16    bool -> expr expr EQUALITY
+Rule 17    bool -> int int EQUALITY
+Rule 18    bool -> int float EQUALITY
+Rule 19    bool -> float int EQUALITY
+Rule 20    bool -> float float EQUALITY
+Rule 21    bool -> bool BOOL_OP_UN
+Rule 22    bool -> bool bool BOOL_OP_BI
+Rule 23    bool -> bool expr expr IF_THEN_ELSE
 
 Terminals, with rules where they appear
 
-BOOL_OP_BI           : 
-BOOL_OP_UN           : 
-Comp_OP              : 
-EQUALS               : 
-F                    : 
-FLOAT                : 2
-INT                  : 1 5
-NUM_OP_BI            : 7 8 9 10
-NUM_OP_UN            : 5 6
-T                    : 
+BOOL_OP_BI           : 22
+BOOL_OP_UN           : 21
+COMP_OP              : 15
+EQUALITY             : 16 17 18 19 20
+F                    : 8
+FLOAT                : 6
+IF_THEN_ELSE         : 23
+INT                  : 5 9
+NUM_OP_BI            : 11 12 13 14
+NUM_OP_UN            : 9 10
+T                    : 7
 error                : 
 
 Nonterminals, with rules where they appear
 
-expression           : 
-float                : 4 6 8 8 9 10
-int                  : 3 7 7 9 10 0
+bool                 : 2 21 22 22 23
+expr                 : 16 16 23 23 0
+float                : 4 10 12 12 13 14 18 19 20 20
+int                  : 3 11 11 13 14 15 15 17 17 18 19
+num                  : 1
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . int
-    (1) int -> . INT
-    (5) int -> . INT NUM_OP_UN
-    (7) int -> . int int NUM_OP_BI
+    (0) S' -> . expr
+    (1) expr -> . num
+    (2) expr -> . bool
+    (3) num -> . int
+    (4) num -> . float
+    (7) bool -> . T
+    (8) bool -> . F
+    (15) bool -> . int int COMP_OP
+    (16) bool -> . expr expr EQUALITY
+    (17) bool -> . int int EQUALITY
+    (18) bool -> . int float EQUALITY
+    (19) bool -> . float int EQUALITY
+    (20) bool -> . float float EQUALITY
+    (21) bool -> . bool BOOL_OP_UN
+    (22) bool -> . bool bool BOOL_OP_BI
+    (23) bool -> . bool expr expr IF_THEN_ELSE
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
 
-    INT             shift and go to state 2
+    T               shift and go to state 6
+    F               shift and go to state 7
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
 
-    int                            shift and go to state 1
+    expr                           shift and go to state 1
+    num                            shift and go to state 2
+    bool                           shift and go to state 3
+    int                            shift and go to state 4
+    float                          shift and go to state 5
 
 state 1
 
-    (0) S' -> int .
-    (7) int -> int . int NUM_OP_BI
-    (1) int -> . INT
-    (5) int -> . INT NUM_OP_UN
-    (7) int -> . int int NUM_OP_BI
+    (0) S' -> expr .
+    (16) bool -> expr . expr EQUALITY
+    (1) expr -> . num
+    (2) expr -> . bool
+    (3) num -> . int
+    (4) num -> . float
+    (7) bool -> . T
+    (8) bool -> . F
+    (15) bool -> . int int COMP_OP
+    (16) bool -> . expr expr EQUALITY
+    (17) bool -> . int int EQUALITY
+    (18) bool -> . int float EQUALITY
+    (19) bool -> . float int EQUALITY
+    (20) bool -> . float float EQUALITY
+    (21) bool -> . bool BOOL_OP_UN
+    (22) bool -> . bool bool BOOL_OP_BI
+    (23) bool -> . bool expr expr IF_THEN_ELSE
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
 
-    INT             shift and go to state 2
+    T               shift and go to state 6
+    F               shift and go to state 7
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
 
-    int                            shift and go to state 3
+    expr                           shift and go to state 10
+    num                            shift and go to state 2
+    bool                           shift and go to state 3
+    int                            shift and go to state 4
+    float                          shift and go to state 5
 
 state 2
 
-    (1) int -> INT .
-    (5) int -> INT . NUM_OP_UN
+    (1) expr -> num .
 
-    INT             reduce using rule 1 (int -> INT .)
-    $end            reduce using rule 1 (int -> INT .)
-    NUM_OP_BI       reduce using rule 1 (int -> INT .)
-    NUM_OP_UN       shift and go to state 4
+    T               reduce using rule 1 (expr -> num .)
+    F               reduce using rule 1 (expr -> num .)
+    INT             reduce using rule 1 (expr -> num .)
+    FLOAT           reduce using rule 1 (expr -> num .)
+    $end            reduce using rule 1 (expr -> num .)
+    EQUALITY        reduce using rule 1 (expr -> num .)
+    IF_THEN_ELSE    reduce using rule 1 (expr -> num .)
 
 
 state 3
 
-    (7) int -> int int . NUM_OP_BI
-    (7) int -> int . int NUM_OP_BI
-    (1) int -> . INT
-    (5) int -> . INT NUM_OP_UN
-    (7) int -> . int int NUM_OP_BI
+    (2) expr -> bool .
+    (21) bool -> bool . BOOL_OP_UN
+    (22) bool -> bool . bool BOOL_OP_BI
+    (23) bool -> bool . expr expr IF_THEN_ELSE
+    (7) bool -> . T
+    (8) bool -> . F
+    (15) bool -> . int int COMP_OP
+    (16) bool -> . expr expr EQUALITY
+    (17) bool -> . int int EQUALITY
+    (18) bool -> . int float EQUALITY
+    (19) bool -> . float int EQUALITY
+    (20) bool -> . float float EQUALITY
+    (21) bool -> . bool BOOL_OP_UN
+    (22) bool -> . bool bool BOOL_OP_BI
+    (23) bool -> . bool expr expr IF_THEN_ELSE
+    (1) expr -> . num
+    (2) expr -> . bool
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+    (3) num -> . int
+    (4) num -> . float
 
-    NUM_OP_BI       shift and go to state 5
-    INT             shift and go to state 2
+  ! shift/reduce conflict for T resolved as shift
+  ! shift/reduce conflict for F resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+    $end            reduce using rule 2 (expr -> bool .)
+    EQUALITY        reduce using rule 2 (expr -> bool .)
+    IF_THEN_ELSE    reduce using rule 2 (expr -> bool .)
+    BOOL_OP_UN      shift and go to state 12
+    T               shift and go to state 6
+    F               shift and go to state 7
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
 
-    int                            shift and go to state 3
+  ! T               [ reduce using rule 2 (expr -> bool .) ]
+  ! F               [ reduce using rule 2 (expr -> bool .) ]
+  ! INT             [ reduce using rule 2 (expr -> bool .) ]
+  ! FLOAT           [ reduce using rule 2 (expr -> bool .) ]
+
+    bool                           shift and go to state 11
+    expr                           shift and go to state 13
+    int                            shift and go to state 14
+    float                          shift and go to state 15
+    num                            shift and go to state 2
 
 state 4
 
-    (5) int -> INT NUM_OP_UN .
+    (3) num -> int .
+    (15) bool -> int . int COMP_OP
+    (17) bool -> int . int EQUALITY
+    (18) bool -> int . float EQUALITY
+    (11) int -> int . int NUM_OP_BI
+    (13) float -> int . float NUM_OP_BI
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
 
-    INT             reduce using rule 5 (int -> INT NUM_OP_UN .)
-    $end            reduce using rule 5 (int -> INT NUM_OP_UN .)
-    NUM_OP_BI       reduce using rule 5 (int -> INT NUM_OP_UN .)
+  ! shift/reduce conflict for INT resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+    T               reduce using rule 3 (num -> int .)
+    F               reduce using rule 3 (num -> int .)
+    $end            reduce using rule 3 (num -> int .)
+    EQUALITY        reduce using rule 3 (num -> int .)
+    IF_THEN_ELSE    reduce using rule 3 (num -> int .)
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
 
+  ! INT             [ reduce using rule 3 (num -> int .) ]
+  ! FLOAT           [ reduce using rule 3 (num -> int .) ]
+
+    int                            shift and go to state 16
+    float                          shift and go to state 17
 
 state 5
 
-    (7) int -> int int NUM_OP_BI .
+    (4) num -> float .
+    (19) bool -> float . int EQUALITY
+    (20) bool -> float . float EQUALITY
+    (10) float -> float . NUM_OP_UN
+    (12) float -> float . float NUM_OP_BI
+    (14) float -> float . int NUM_OP_BI
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
 
-    INT             reduce using rule 7 (int -> int int NUM_OP_BI .)
-    $end            reduce using rule 7 (int -> int int NUM_OP_BI .)
-    NUM_OP_BI       reduce using rule 7 (int -> int int NUM_OP_BI .)
+  ! shift/reduce conflict for INT resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+    T               reduce using rule 4 (num -> float .)
+    F               reduce using rule 4 (num -> float .)
+    $end            reduce using rule 4 (num -> float .)
+    EQUALITY        reduce using rule 4 (num -> float .)
+    IF_THEN_ELSE    reduce using rule 4 (num -> float .)
+    NUM_OP_UN       shift and go to state 20
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
 
+  ! INT             [ reduce using rule 4 (num -> float .) ]
+  ! FLOAT           [ reduce using rule 4 (num -> float .) ]
+
+    float                          shift and go to state 18
+    int                            shift and go to state 19
+
+state 6
+
+    (7) bool -> T .
+
+    BOOL_OP_UN      reduce using rule 7 (bool -> T .)
+    T               reduce using rule 7 (bool -> T .)
+    F               reduce using rule 7 (bool -> T .)
+    INT             reduce using rule 7 (bool -> T .)
+    FLOAT           reduce using rule 7 (bool -> T .)
+    $end            reduce using rule 7 (bool -> T .)
+    EQUALITY        reduce using rule 7 (bool -> T .)
+    BOOL_OP_BI      reduce using rule 7 (bool -> T .)
+    IF_THEN_ELSE    reduce using rule 7 (bool -> T .)
+
+
+state 7
+
+    (8) bool -> F .
+
+    BOOL_OP_UN      reduce using rule 8 (bool -> F .)
+    T               reduce using rule 8 (bool -> F .)
+    F               reduce using rule 8 (bool -> F .)
+    INT             reduce using rule 8 (bool -> F .)
+    FLOAT           reduce using rule 8 (bool -> F .)
+    $end            reduce using rule 8 (bool -> F .)
+    EQUALITY        reduce using rule 8 (bool -> F .)
+    BOOL_OP_BI      reduce using rule 8 (bool -> F .)
+    IF_THEN_ELSE    reduce using rule 8 (bool -> F .)
+
+
+state 8
+
+    (5) int -> INT .
+    (9) int -> INT . NUM_OP_UN
+
+    INT             reduce using rule 5 (int -> INT .)
+    FLOAT           reduce using rule 5 (int -> INT .)
+    T               reduce using rule 5 (int -> INT .)
+    F               reduce using rule 5 (int -> INT .)
+    $end            reduce using rule 5 (int -> INT .)
+    EQUALITY        reduce using rule 5 (int -> INT .)
+    COMP_OP         reduce using rule 5 (int -> INT .)
+    NUM_OP_BI       reduce using rule 5 (int -> INT .)
+    IF_THEN_ELSE    reduce using rule 5 (int -> INT .)
+    NUM_OP_UN       shift and go to state 21
+
+
+state 9
+
+    (6) float -> FLOAT .
+
+    NUM_OP_UN       reduce using rule 6 (float -> FLOAT .)
+    INT             reduce using rule 6 (float -> FLOAT .)
+    FLOAT           reduce using rule 6 (float -> FLOAT .)
+    T               reduce using rule 6 (float -> FLOAT .)
+    F               reduce using rule 6 (float -> FLOAT .)
+    $end            reduce using rule 6 (float -> FLOAT .)
+    EQUALITY        reduce using rule 6 (float -> FLOAT .)
+    NUM_OP_BI       reduce using rule 6 (float -> FLOAT .)
+    IF_THEN_ELSE    reduce using rule 6 (float -> FLOAT .)
+
+
+state 10
+
+    (16) bool -> expr expr . EQUALITY
+    (16) bool -> expr . expr EQUALITY
+    (1) expr -> . num
+    (2) expr -> . bool
+    (3) num -> . int
+    (4) num -> . float
+    (7) bool -> . T
+    (8) bool -> . F
+    (15) bool -> . int int COMP_OP
+    (16) bool -> . expr expr EQUALITY
+    (17) bool -> . int int EQUALITY
+    (18) bool -> . int float EQUALITY
+    (19) bool -> . float int EQUALITY
+    (20) bool -> . float float EQUALITY
+    (21) bool -> . bool BOOL_OP_UN
+    (22) bool -> . bool bool BOOL_OP_BI
+    (23) bool -> . bool expr expr IF_THEN_ELSE
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+
+    EQUALITY        shift and go to state 22
+    T               shift and go to state 6
+    F               shift and go to state 7
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
+
+    expr                           shift and go to state 10
+    num                            shift and go to state 2
+    bool                           shift and go to state 3
+    int                            shift and go to state 4
+    float                          shift and go to state 5
+
+state 11
+
+    (22) bool -> bool bool . BOOL_OP_BI
+    (21) bool -> bool . BOOL_OP_UN
+    (22) bool -> bool . bool BOOL_OP_BI
+    (23) bool -> bool . expr expr IF_THEN_ELSE
+    (2) expr -> bool .
+    (7) bool -> . T
+    (8) bool -> . F
+    (15) bool -> . int int COMP_OP
+    (16) bool -> . expr expr EQUALITY
+    (17) bool -> . int int EQUALITY
+    (18) bool -> . int float EQUALITY
+    (19) bool -> . float int EQUALITY
+    (20) bool -> . float float EQUALITY
+    (21) bool -> . bool BOOL_OP_UN
+    (22) bool -> . bool bool BOOL_OP_BI
+    (23) bool -> . bool expr expr IF_THEN_ELSE
+    (1) expr -> . num
+    (2) expr -> . bool
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+    (3) num -> . int
+    (4) num -> . float
+
+  ! shift/reduce conflict for T resolved as shift
+  ! shift/reduce conflict for F resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+    BOOL_OP_BI      shift and go to state 23
+    BOOL_OP_UN      shift and go to state 12
+    T               shift and go to state 6
+    F               shift and go to state 7
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
+
+  ! T               [ reduce using rule 2 (expr -> bool .) ]
+  ! F               [ reduce using rule 2 (expr -> bool .) ]
+  ! INT             [ reduce using rule 2 (expr -> bool .) ]
+  ! FLOAT           [ reduce using rule 2 (expr -> bool .) ]
+
+    bool                           shift and go to state 11
+    expr                           shift and go to state 13
+    int                            shift and go to state 14
+    float                          shift and go to state 15
+    num                            shift and go to state 2
+
+state 12
+
+    (21) bool -> bool BOOL_OP_UN .
+
+    BOOL_OP_UN      reduce using rule 21 (bool -> bool BOOL_OP_UN .)
+    T               reduce using rule 21 (bool -> bool BOOL_OP_UN .)
+    F               reduce using rule 21 (bool -> bool BOOL_OP_UN .)
+    INT             reduce using rule 21 (bool -> bool BOOL_OP_UN .)
+    FLOAT           reduce using rule 21 (bool -> bool BOOL_OP_UN .)
+    $end            reduce using rule 21 (bool -> bool BOOL_OP_UN .)
+    EQUALITY        reduce using rule 21 (bool -> bool BOOL_OP_UN .)
+    BOOL_OP_BI      reduce using rule 21 (bool -> bool BOOL_OP_UN .)
+    IF_THEN_ELSE    reduce using rule 21 (bool -> bool BOOL_OP_UN .)
+
+
+state 13
+
+    (23) bool -> bool expr . expr IF_THEN_ELSE
+    (16) bool -> expr . expr EQUALITY
+    (1) expr -> . num
+    (2) expr -> . bool
+    (3) num -> . int
+    (4) num -> . float
+    (7) bool -> . T
+    (8) bool -> . F
+    (15) bool -> . int int COMP_OP
+    (16) bool -> . expr expr EQUALITY
+    (17) bool -> . int int EQUALITY
+    (18) bool -> . int float EQUALITY
+    (19) bool -> . float int EQUALITY
+    (20) bool -> . float float EQUALITY
+    (21) bool -> . bool BOOL_OP_UN
+    (22) bool -> . bool bool BOOL_OP_BI
+    (23) bool -> . bool expr expr IF_THEN_ELSE
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+
+    T               shift and go to state 6
+    F               shift and go to state 7
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
+
+    bool                           shift and go to state 3
+    expr                           shift and go to state 24
+    num                            shift and go to state 2
+    int                            shift and go to state 4
+    float                          shift and go to state 5
+
+state 14
+
+    (15) bool -> int . int COMP_OP
+    (17) bool -> int . int EQUALITY
+    (18) bool -> int . float EQUALITY
+    (11) int -> int . int NUM_OP_BI
+    (13) float -> int . float NUM_OP_BI
+    (3) num -> int .
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+
+  ! shift/reduce conflict for INT resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+    T               reduce using rule 3 (num -> int .)
+    F               reduce using rule 3 (num -> int .)
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
+
+  ! INT             [ reduce using rule 3 (num -> int .) ]
+  ! FLOAT           [ reduce using rule 3 (num -> int .) ]
+
+    int                            shift and go to state 16
+    float                          shift and go to state 17
+
+state 15
+
+    (19) bool -> float . int EQUALITY
+    (20) bool -> float . float EQUALITY
+    (10) float -> float . NUM_OP_UN
+    (12) float -> float . float NUM_OP_BI
+    (14) float -> float . int NUM_OP_BI
+    (4) num -> float .
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+
+  ! shift/reduce conflict for INT resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+    NUM_OP_UN       shift and go to state 20
+    T               reduce using rule 4 (num -> float .)
+    F               reduce using rule 4 (num -> float .)
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
+
+  ! INT             [ reduce using rule 4 (num -> float .) ]
+  ! FLOAT           [ reduce using rule 4 (num -> float .) ]
+
+    float                          shift and go to state 18
+    int                            shift and go to state 19
+
+state 16
+
+    (15) bool -> int int . COMP_OP
+    (17) bool -> int int . EQUALITY
+    (11) int -> int int . NUM_OP_BI
+    (11) int -> int . int NUM_OP_BI
+    (13) float -> int . float NUM_OP_BI
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+
+    COMP_OP         shift and go to state 26
+    EQUALITY        shift and go to state 27
+    NUM_OP_BI       shift and go to state 28
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
+
+    int                            shift and go to state 25
+    float                          shift and go to state 29
+
+state 17
+
+    (18) bool -> int float . EQUALITY
+    (13) float -> int float . NUM_OP_BI
+    (10) float -> float . NUM_OP_UN
+    (12) float -> float . float NUM_OP_BI
+    (14) float -> float . int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+
+    EQUALITY        shift and go to state 32
+    NUM_OP_BI       shift and go to state 33
+    NUM_OP_UN       shift and go to state 20
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    int                            shift and go to state 30
+    float                          shift and go to state 31
+
+state 18
+
+    (20) bool -> float float . EQUALITY
+    (12) float -> float float . NUM_OP_BI
+    (10) float -> float . NUM_OP_UN
+    (12) float -> float . float NUM_OP_BI
+    (14) float -> float . int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+
+    EQUALITY        shift and go to state 34
+    NUM_OP_BI       shift and go to state 35
+    NUM_OP_UN       shift and go to state 20
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    float                          shift and go to state 31
+    int                            shift and go to state 30
+
+state 19
+
+    (19) bool -> float int . EQUALITY
+    (14) float -> float int . NUM_OP_BI
+    (11) int -> int . int NUM_OP_BI
+    (13) float -> int . float NUM_OP_BI
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+
+    EQUALITY        shift and go to state 36
+    NUM_OP_BI       shift and go to state 37
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
+
+    float                          shift and go to state 29
+    int                            shift and go to state 25
+
+state 20
+
+    (10) float -> float NUM_OP_UN .
+
+    NUM_OP_UN       reduce using rule 10 (float -> float NUM_OP_UN .)
+    INT             reduce using rule 10 (float -> float NUM_OP_UN .)
+    FLOAT           reduce using rule 10 (float -> float NUM_OP_UN .)
+    T               reduce using rule 10 (float -> float NUM_OP_UN .)
+    F               reduce using rule 10 (float -> float NUM_OP_UN .)
+    $end            reduce using rule 10 (float -> float NUM_OP_UN .)
+    EQUALITY        reduce using rule 10 (float -> float NUM_OP_UN .)
+    NUM_OP_BI       reduce using rule 10 (float -> float NUM_OP_UN .)
+    IF_THEN_ELSE    reduce using rule 10 (float -> float NUM_OP_UN .)
+
+
+state 21
+
+    (9) int -> INT NUM_OP_UN .
+
+    INT             reduce using rule 9 (int -> INT NUM_OP_UN .)
+    FLOAT           reduce using rule 9 (int -> INT NUM_OP_UN .)
+    T               reduce using rule 9 (int -> INT NUM_OP_UN .)
+    F               reduce using rule 9 (int -> INT NUM_OP_UN .)
+    $end            reduce using rule 9 (int -> INT NUM_OP_UN .)
+    EQUALITY        reduce using rule 9 (int -> INT NUM_OP_UN .)
+    COMP_OP         reduce using rule 9 (int -> INT NUM_OP_UN .)
+    NUM_OP_BI       reduce using rule 9 (int -> INT NUM_OP_UN .)
+    IF_THEN_ELSE    reduce using rule 9 (int -> INT NUM_OP_UN .)
+
+
+state 22
+
+    (16) bool -> expr expr EQUALITY .
+
+    BOOL_OP_UN      reduce using rule 16 (bool -> expr expr EQUALITY .)
+    T               reduce using rule 16 (bool -> expr expr EQUALITY .)
+    F               reduce using rule 16 (bool -> expr expr EQUALITY .)
+    INT             reduce using rule 16 (bool -> expr expr EQUALITY .)
+    FLOAT           reduce using rule 16 (bool -> expr expr EQUALITY .)
+    $end            reduce using rule 16 (bool -> expr expr EQUALITY .)
+    EQUALITY        reduce using rule 16 (bool -> expr expr EQUALITY .)
+    BOOL_OP_BI      reduce using rule 16 (bool -> expr expr EQUALITY .)
+    IF_THEN_ELSE    reduce using rule 16 (bool -> expr expr EQUALITY .)
+
+
+state 23
+
+    (22) bool -> bool bool BOOL_OP_BI .
+
+    BOOL_OP_UN      reduce using rule 22 (bool -> bool bool BOOL_OP_BI .)
+    T               reduce using rule 22 (bool -> bool bool BOOL_OP_BI .)
+    F               reduce using rule 22 (bool -> bool bool BOOL_OP_BI .)
+    INT             reduce using rule 22 (bool -> bool bool BOOL_OP_BI .)
+    FLOAT           reduce using rule 22 (bool -> bool bool BOOL_OP_BI .)
+    $end            reduce using rule 22 (bool -> bool bool BOOL_OP_BI .)
+    EQUALITY        reduce using rule 22 (bool -> bool bool BOOL_OP_BI .)
+    BOOL_OP_BI      reduce using rule 22 (bool -> bool bool BOOL_OP_BI .)
+    IF_THEN_ELSE    reduce using rule 22 (bool -> bool bool BOOL_OP_BI .)
+
+
+state 24
+
+    (23) bool -> bool expr expr . IF_THEN_ELSE
+    (16) bool -> expr expr . EQUALITY
+    (16) bool -> expr . expr EQUALITY
+    (1) expr -> . num
+    (2) expr -> . bool
+    (3) num -> . int
+    (4) num -> . float
+    (7) bool -> . T
+    (8) bool -> . F
+    (15) bool -> . int int COMP_OP
+    (16) bool -> . expr expr EQUALITY
+    (17) bool -> . int int EQUALITY
+    (18) bool -> . int float EQUALITY
+    (19) bool -> . float int EQUALITY
+    (20) bool -> . float float EQUALITY
+    (21) bool -> . bool BOOL_OP_UN
+    (22) bool -> . bool bool BOOL_OP_BI
+    (23) bool -> . bool expr expr IF_THEN_ELSE
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+
+    IF_THEN_ELSE    shift and go to state 38
+    EQUALITY        shift and go to state 22
+    T               shift and go to state 6
+    F               shift and go to state 7
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
+
+    bool                           shift and go to state 3
+    expr                           shift and go to state 10
+    num                            shift and go to state 2
+    int                            shift and go to state 4
+    float                          shift and go to state 5
+
+state 25
+
+    (11) int -> int int . NUM_OP_BI
+    (11) int -> int . int NUM_OP_BI
+    (13) float -> int . float NUM_OP_BI
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+
+    NUM_OP_BI       shift and go to state 28
+    INT             shift and go to state 8
+    FLOAT           shift and go to state 9
+
+    int                            shift and go to state 25
+    float                          shift and go to state 29
+
+state 26
+
+    (15) bool -> int int COMP_OP .
+
+    BOOL_OP_UN      reduce using rule 15 (bool -> int int COMP_OP .)
+    T               reduce using rule 15 (bool -> int int COMP_OP .)
+    F               reduce using rule 15 (bool -> int int COMP_OP .)
+    INT             reduce using rule 15 (bool -> int int COMP_OP .)
+    FLOAT           reduce using rule 15 (bool -> int int COMP_OP .)
+    $end            reduce using rule 15 (bool -> int int COMP_OP .)
+    EQUALITY        reduce using rule 15 (bool -> int int COMP_OP .)
+    BOOL_OP_BI      reduce using rule 15 (bool -> int int COMP_OP .)
+    IF_THEN_ELSE    reduce using rule 15 (bool -> int int COMP_OP .)
+
+
+state 27
+
+    (17) bool -> int int EQUALITY .
+
+    BOOL_OP_UN      reduce using rule 17 (bool -> int int EQUALITY .)
+    T               reduce using rule 17 (bool -> int int EQUALITY .)
+    F               reduce using rule 17 (bool -> int int EQUALITY .)
+    INT             reduce using rule 17 (bool -> int int EQUALITY .)
+    FLOAT           reduce using rule 17 (bool -> int int EQUALITY .)
+    $end            reduce using rule 17 (bool -> int int EQUALITY .)
+    EQUALITY        reduce using rule 17 (bool -> int int EQUALITY .)
+    BOOL_OP_BI      reduce using rule 17 (bool -> int int EQUALITY .)
+    IF_THEN_ELSE    reduce using rule 17 (bool -> int int EQUALITY .)
+
+
+state 28
+
+    (11) int -> int int NUM_OP_BI .
+
+    INT             reduce using rule 11 (int -> int int NUM_OP_BI .)
+    FLOAT           reduce using rule 11 (int -> int int NUM_OP_BI .)
+    T               reduce using rule 11 (int -> int int NUM_OP_BI .)
+    F               reduce using rule 11 (int -> int int NUM_OP_BI .)
+    $end            reduce using rule 11 (int -> int int NUM_OP_BI .)
+    EQUALITY        reduce using rule 11 (int -> int int NUM_OP_BI .)
+    COMP_OP         reduce using rule 11 (int -> int int NUM_OP_BI .)
+    NUM_OP_BI       reduce using rule 11 (int -> int int NUM_OP_BI .)
+    IF_THEN_ELSE    reduce using rule 11 (int -> int int NUM_OP_BI .)
+
+
+state 29
+
+    (13) float -> int float . NUM_OP_BI
+    (10) float -> float . NUM_OP_UN
+    (12) float -> float . float NUM_OP_BI
+    (14) float -> float . int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+
+    NUM_OP_BI       shift and go to state 33
+    NUM_OP_UN       shift and go to state 20
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    int                            shift and go to state 30
+    float                          shift and go to state 31
+
+state 30
+
+    (14) float -> float int . NUM_OP_BI
+    (13) float -> int . float NUM_OP_BI
+    (11) int -> int . int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+
+    NUM_OP_BI       shift and go to state 37
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    float                          shift and go to state 29
+    int                            shift and go to state 39
+
+state 31
+
+    (12) float -> float float . NUM_OP_BI
+    (10) float -> float . NUM_OP_UN
+    (12) float -> float . float NUM_OP_BI
+    (14) float -> float . int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+
+    NUM_OP_BI       shift and go to state 35
+    NUM_OP_UN       shift and go to state 20
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    float                          shift and go to state 31
+    int                            shift and go to state 30
+
+state 32
+
+    (18) bool -> int float EQUALITY .
+
+    BOOL_OP_UN      reduce using rule 18 (bool -> int float EQUALITY .)
+    T               reduce using rule 18 (bool -> int float EQUALITY .)
+    F               reduce using rule 18 (bool -> int float EQUALITY .)
+    INT             reduce using rule 18 (bool -> int float EQUALITY .)
+    FLOAT           reduce using rule 18 (bool -> int float EQUALITY .)
+    $end            reduce using rule 18 (bool -> int float EQUALITY .)
+    EQUALITY        reduce using rule 18 (bool -> int float EQUALITY .)
+    BOOL_OP_BI      reduce using rule 18 (bool -> int float EQUALITY .)
+    IF_THEN_ELSE    reduce using rule 18 (bool -> int float EQUALITY .)
+
+
+state 33
+
+    (13) float -> int float NUM_OP_BI .
+
+    NUM_OP_UN       reduce using rule 13 (float -> int float NUM_OP_BI .)
+    INT             reduce using rule 13 (float -> int float NUM_OP_BI .)
+    FLOAT           reduce using rule 13 (float -> int float NUM_OP_BI .)
+    T               reduce using rule 13 (float -> int float NUM_OP_BI .)
+    F               reduce using rule 13 (float -> int float NUM_OP_BI .)
+    $end            reduce using rule 13 (float -> int float NUM_OP_BI .)
+    EQUALITY        reduce using rule 13 (float -> int float NUM_OP_BI .)
+    NUM_OP_BI       reduce using rule 13 (float -> int float NUM_OP_BI .)
+    IF_THEN_ELSE    reduce using rule 13 (float -> int float NUM_OP_BI .)
+
+
+state 34
+
+    (20) bool -> float float EQUALITY .
+
+    BOOL_OP_UN      reduce using rule 20 (bool -> float float EQUALITY .)
+    T               reduce using rule 20 (bool -> float float EQUALITY .)
+    F               reduce using rule 20 (bool -> float float EQUALITY .)
+    INT             reduce using rule 20 (bool -> float float EQUALITY .)
+    FLOAT           reduce using rule 20 (bool -> float float EQUALITY .)
+    $end            reduce using rule 20 (bool -> float float EQUALITY .)
+    EQUALITY        reduce using rule 20 (bool -> float float EQUALITY .)
+    BOOL_OP_BI      reduce using rule 20 (bool -> float float EQUALITY .)
+    IF_THEN_ELSE    reduce using rule 20 (bool -> float float EQUALITY .)
+
+
+state 35
+
+    (12) float -> float float NUM_OP_BI .
+
+    NUM_OP_UN       reduce using rule 12 (float -> float float NUM_OP_BI .)
+    INT             reduce using rule 12 (float -> float float NUM_OP_BI .)
+    FLOAT           reduce using rule 12 (float -> float float NUM_OP_BI .)
+    T               reduce using rule 12 (float -> float float NUM_OP_BI .)
+    F               reduce using rule 12 (float -> float float NUM_OP_BI .)
+    $end            reduce using rule 12 (float -> float float NUM_OP_BI .)
+    EQUALITY        reduce using rule 12 (float -> float float NUM_OP_BI .)
+    NUM_OP_BI       reduce using rule 12 (float -> float float NUM_OP_BI .)
+    IF_THEN_ELSE    reduce using rule 12 (float -> float float NUM_OP_BI .)
+
+
+state 36
+
+    (19) bool -> float int EQUALITY .
+
+    BOOL_OP_UN      reduce using rule 19 (bool -> float int EQUALITY .)
+    T               reduce using rule 19 (bool -> float int EQUALITY .)
+    F               reduce using rule 19 (bool -> float int EQUALITY .)
+    INT             reduce using rule 19 (bool -> float int EQUALITY .)
+    FLOAT           reduce using rule 19 (bool -> float int EQUALITY .)
+    $end            reduce using rule 19 (bool -> float int EQUALITY .)
+    EQUALITY        reduce using rule 19 (bool -> float int EQUALITY .)
+    BOOL_OP_BI      reduce using rule 19 (bool -> float int EQUALITY .)
+    IF_THEN_ELSE    reduce using rule 19 (bool -> float int EQUALITY .)
+
+
+state 37
+
+    (14) float -> float int NUM_OP_BI .
+
+    NUM_OP_UN       reduce using rule 14 (float -> float int NUM_OP_BI .)
+    INT             reduce using rule 14 (float -> float int NUM_OP_BI .)
+    FLOAT           reduce using rule 14 (float -> float int NUM_OP_BI .)
+    T               reduce using rule 14 (float -> float int NUM_OP_BI .)
+    F               reduce using rule 14 (float -> float int NUM_OP_BI .)
+    $end            reduce using rule 14 (float -> float int NUM_OP_BI .)
+    EQUALITY        reduce using rule 14 (float -> float int NUM_OP_BI .)
+    NUM_OP_BI       reduce using rule 14 (float -> float int NUM_OP_BI .)
+    IF_THEN_ELSE    reduce using rule 14 (float -> float int NUM_OP_BI .)
+
+
+state 38
+
+    (23) bool -> bool expr expr IF_THEN_ELSE .
+
+    BOOL_OP_UN      reduce using rule 23 (bool -> bool expr expr IF_THEN_ELSE .)
+    T               reduce using rule 23 (bool -> bool expr expr IF_THEN_ELSE .)
+    F               reduce using rule 23 (bool -> bool expr expr IF_THEN_ELSE .)
+    INT             reduce using rule 23 (bool -> bool expr expr IF_THEN_ELSE .)
+    FLOAT           reduce using rule 23 (bool -> bool expr expr IF_THEN_ELSE .)
+    $end            reduce using rule 23 (bool -> bool expr expr IF_THEN_ELSE .)
+    EQUALITY        reduce using rule 23 (bool -> bool expr expr IF_THEN_ELSE .)
+    BOOL_OP_BI      reduce using rule 23 (bool -> bool expr expr IF_THEN_ELSE .)
+    IF_THEN_ELSE    reduce using rule 23 (bool -> bool expr expr IF_THEN_ELSE .)
+
+
+state 39
+
+    (11) int -> int int . NUM_OP_BI
+    (13) float -> int . float NUM_OP_BI
+    (11) int -> int . int NUM_OP_BI
+    (6) float -> . FLOAT
+    (10) float -> . float NUM_OP_UN
+    (12) float -> . float float NUM_OP_BI
+    (13) float -> . int float NUM_OP_BI
+    (14) float -> . float int NUM_OP_BI
+    (5) int -> . INT
+    (9) int -> . INT NUM_OP_UN
+    (11) int -> . int int NUM_OP_BI
+
+    NUM_OP_BI       shift and go to state 28
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    int                            shift and go to state 39
+    float                          shift and go to state 29
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for T in state 3 resolved as shift
+WARNING: shift/reduce conflict for F in state 3 resolved as shift
+WARNING: shift/reduce conflict for INT in state 3 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 3 resolved as shift
+WARNING: shift/reduce conflict for INT in state 4 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 4 resolved as shift
+WARNING: shift/reduce conflict for INT in state 5 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 5 resolved as shift
+WARNING: shift/reduce conflict for T in state 11 resolved as shift
+WARNING: shift/reduce conflict for F in state 11 resolved as shift
+WARNING: shift/reduce conflict for INT in state 11 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 11 resolved as shift
+WARNING: shift/reduce conflict for INT in state 14 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 14 resolved as shift
+WARNING: shift/reduce conflict for INT in state 15 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 15 resolved as shift
